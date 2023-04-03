@@ -1,7 +1,8 @@
+import styles from './Table.module.css'
 import { Row, Column } from '../types';
 
 function Table({ rows, columns }: { rows: Row[], columns: Column[] }) {
-  return (<table>
+  return (<table className={styles.table}>
     <thead >
       <tr>
         {columns.map(column => (<th key={column.key}>{column.headerName}</th>))}
