@@ -21,7 +21,7 @@ function calculateConsecutive(rows) {
     let consecutive = 0;
     rows.forEach(row => {
         const { regionName, ...rainByDate } = row;
-        const rainValues = Object.values(rainByDate);
+        const rainValues:number[] = Object.values(rainByDate);
         rainValues.forEach((value, index) => {
             if (value > 10 && rainValues[index + 1] > 10) consecutive++;
         });
