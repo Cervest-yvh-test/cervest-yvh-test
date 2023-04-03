@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import useSWR from 'swr'
 import { Table } from '../components';
 import Dropdown from '../components/Dropdown';
+import { ALL } from '../constants';
 import { Column, Row } from '../types';
 
 const ENDPOINT = '/api/rainfall';
@@ -50,16 +52,30 @@ function getRows(data): Row[] {
   return rows;
 }
 
+function filterRowsByRegion(rows, filter) {
+  if (filter.toLowerCase() === ALL.toLowerCase()) return rows;
+  return rows.filter(row => row.regionName.toLowerCase() === filter.toLowerCase());
+}
+
 function Index() {
+  const [regionFilter, setRegionFilter] = useState<string>('');
+
   const { data } = useSWR(ENDPOINT, fetcher)
   if (!data) return null;
   const rows = getRows(data);
   const columns = getColumns(data);
   const regions = rows.map(r => r.regionName);
+
+  const filteredRows = regionFilter ? filterRowsByRegion(rows, regionFilter) : rows;
+
+  const onChangeRegion = (event) => {
+    setRegionFilter(event.target.value);
+  }
+
   return (
     <>
-      <Dropdown regions={regions} />
-      <Table rows={rows} columns={columns} />
+      <Dropdown regions={regions} onChange={onChangeRegion} />
+      <Table rows={filteredRows} columns={columns} />
     </>
   );
 }

@@ -1,9 +1,9 @@
-const ALL = 'All';
+import { ALL } from "../constants";
 
-function Dropdown({ regions }) {
+function Dropdown({ regions, onChange }) {
 
-    return (<select>
-        {['All', ...regions].map(region => {
+    return (<select onChange={onChange}>
+        {[ALL, ...regions].map(region => {
             const key = region.toLowerCase();
             return <option key={key} value={key}>{region}</option>
         })}
