@@ -59,8 +59,10 @@ function filterRowsByRegion(rows, filter) {
 function Index() {
   const [regionFilter, setRegionFilter] = useState<string>('');
 
-  const { data } = useSWR(ENDPOINT, fetcher)
+  const { data, error } = useSWR(ENDPOINT, fetcher)
   if (!data) return null;
+  if (error) return <p>Error loading the data</p>;
+  
   const rows = getRows(data);
   const columns = getColumns(data);
   const regions = rows.map(r => r.regionName);
