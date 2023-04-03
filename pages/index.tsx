@@ -25,7 +25,6 @@ function getRainByRegionAndDate(data = []) {
 }
 
 
-
 const REGION_COLUMN: Column = {
   headerName: 'Region',
   key: 'regionName',
@@ -60,8 +59,23 @@ export default function Index() {
   if (!data) return null;
   const rows = getRows(data);
   const columns = getColumns(data);
-  console.log({ rows, columns });
-  return <><p>Hi!</p></>;
+
+  return (
+    <table>
+      <thead >
+        <tr>
+          {columns.map(column => (<th key={column.key}>{column.headerName}</th>))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr key={row.regionName}>
+            {columns.map((column) => <td>{row[column.key]}</td>)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
 
 
