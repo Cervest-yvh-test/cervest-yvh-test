@@ -11,7 +11,7 @@ function Table({ rows, columns }: { rows: Row[], columns: Column[] }) {
     <tbody>
       {rows.map((row) => (
         <tr key={row.regionName}>
-          {columns.map((column) => <td>{row[column.key]}</td>)}
+          {columns.map((column) => <td key={column.key}>{row[column.key]}</td>)}
         </tr>
       ))}
     </tbody>

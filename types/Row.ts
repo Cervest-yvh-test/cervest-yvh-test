@@ -1,2 +1,2 @@
-export type Row = { [headerName: string]: string };
+export type Row = { [headerName: string]: string | number };
 
