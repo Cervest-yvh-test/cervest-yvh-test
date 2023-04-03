@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import useSWR from 'swr'
-import { Table } from '../components';
+import { Summary, Table } from '../components';
 import Dropdown from '../components/Dropdown';
-import Summary from '../components/Summary';
 import { ALL } from '../constants';
 import { Column, Row } from '../types';
 
 const ENDPOINT = '/api/rainfall';
-// @TODO: Adjust types
 const fetcher = (endpoint) => fetch(endpoint).then(res => res.json())
 
 const parseDate = (date = '') => date.split('T')[0]; // As we don't need hours, minutes and so on
