@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useSWR from 'swr'
 import { Table } from '../components';
 import Dropdown from '../components/Dropdown';
+import Summary from '../components/Summary';
 import { ALL } from '../constants';
 import { Column, Row } from '../types';
 
@@ -76,6 +77,7 @@ function Index() {
     <>
       <Dropdown regions={regions} onChange={onChangeRegion} />
       <Table rows={filteredRows} columns={columns} />
+      <Summary rows={filteredRows} />
     </>
   );
 }
