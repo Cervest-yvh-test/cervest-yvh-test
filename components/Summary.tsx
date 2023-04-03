@@ -36,11 +36,16 @@ function Summary({ rows }: { rows: Row[] }) {
     const consecutive = calculateConsecutive(rows);
 
     return (
-        <ul>
-            <li>Total rainfall: {total}</li>
-            <li>Average rainfall: {average} mm</li>
-            <li>Consecutive days with rainfall greater than 10mm: {consecutive}</li>
-        </ul>
+        <>
+            <br />
+            <p><u><b>Summary</b></u></p>
+            <ul>
+                <li>Total rainfall: <b>{total}</b></li>
+                <li>Average rainfall: <b>{average} mm </b></li>
+                <li>Consecutive days with rainfall greater than 10mm: <b>{consecutive}</b></li>
+            </ul>
+        </>
+
     )
 
 }
