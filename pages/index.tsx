@@ -1,14 +1,9 @@
 import useSWR from 'swr'
+import { Table } from '../components';
+import { Column, Row } from '../types';
 
 const ENDPOINT = '/api/rainfall';
 // @TODO: Adjust types
-
-type Row = { [headerName: string]: string };
-type Column = {
-  headerName: string;
-  key: string;
-}
-
 const fetcher = (endpoint) => fetch(endpoint).then(res => res.json())
 
 const parseDate = (date = '') => date.split('T')[0]; // As we don't need hours, minutes and so on
@@ -54,28 +49,16 @@ function getRows(data): Row[] {
   return rows;
 }
 
-export default function Index() {
+function Index() {
   const { data } = useSWR(ENDPOINT, fetcher)
   if (!data) return null;
   const rows = getRows(data);
   const columns = getColumns(data);
 
   return (
-    <table>
-      <thead >
-        <tr>
-          {columns.map(column => (<th key={column.key}>{column.headerName}</th>))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <tr key={row.regionName}>
-            {columns.map((column) => <td>{row[column.key]}</td>)}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table rows={rows} columns={columns} />
   );
 }
 
 
+export default Index;
