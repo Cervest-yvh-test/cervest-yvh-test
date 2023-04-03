@@ -1,5 +1,6 @@
 import useSWR from 'swr'
 import { Table } from '../components';
+import Dropdown from '../components/Dropdown';
 import { Column, Row } from '../types';
 
 const ENDPOINT = '/api/rainfall';
@@ -54,9 +55,12 @@ function Index() {
   if (!data) return null;
   const rows = getRows(data);
   const columns = getColumns(data);
-
+  const regions = rows.map(r => r.regionName);
   return (
-    <Table rows={rows} columns={columns} />
+    <>
+      <Dropdown regions={regions} />
+      <Table rows={rows} columns={columns} />
+    </>
   );
 }
 
